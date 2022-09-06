@@ -1,13 +1,7 @@
-from selenium.webdriver.common.by import By
-import time
+from .Pages.main_page import MainPage
 
-class TestPage():
-    def test_button_presented (self, browser):
-        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
-        browser.get(link)
-
-        time.sleep(3)
-
-        # проверка что кнопка есть
-        button = browser.find_elements(By.CSS_SELECTOR, ".btn-add-to-basket")
-        assert button, 'element BUTTON not found'
+def test_guest_can_go_to_login_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/"
+    page = MainPage(browser, link)   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+    page.open()                      # открываем страницу
+    page.go_to_login_page()          # выполняем метод страницы — переходим на страницу логина
