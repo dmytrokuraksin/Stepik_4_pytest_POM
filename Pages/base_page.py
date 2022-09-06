@@ -10,12 +10,12 @@ class BasePage():
     def open(self):
         self.browser.get(self.url)
 
-    def is_element_present(self, how, what):
-        try:
-            self.browser.find_element(how, what)
-        except NoSuchElementException:
-            return False
-        return True
+    # def is_element_present(self, how, what):
+    #     try:
+    #         self.browser.find_element(how, what)
+    #     except NoSuchElementException:
+    #         return False
+    #     return True
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert

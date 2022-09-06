@@ -1,12 +1,17 @@
 from .Pages.product_page import ProductPage
-import time
+import  pytest
 
-def test_guest_can_add_product_to_basket(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+@pytest.mark.parametrize('number', [str(x) for x in range(10)])
+def test_guest_can_add_product_to_basket(browser,number):
+    link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{number}"
     page = ProductPage(browser, link)
     page.open()
-    page.should_be_add_button()
+
+    product_name = page.save_name_product()
+    product_price = page.save_price_product()
+
     page.add_to_cart()
     page.solve_quiz_and_get_code()
-    time.sleep(10)
 
+    page.testing_price_product(product_price)
+    page.testing_name_product(product_name)
